@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, {Path, Polygon} from 'react-native-svg';
 
-const CustomIcon = () => (
+const Logo = () => (
   <Svg width="40" height="40" viewBox="0 0 40 40">
     <Path
       fill="#fe9526"
@@ -23,4 +23,4 @@ const CustomIcon = () => (
   </Svg>
 );
 
-export default CustomIcon;
+export default Logo;
