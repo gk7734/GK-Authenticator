@@ -11,12 +11,27 @@ import Icon from 'react-native-vector-icons/Fontisto';
 import FIcon from 'react-native-vector-icons/Feather';
 import MtIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AuthBox from '../components/AuthBox.tsx';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  AddAuth: undefined;
+  // 다른 스크린들도 여기에 추가
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 const Home: FC = () => {
   const inputRef = useRef<TextInput>(null);
+  const navigation = useNavigation<NavigationProp>();
 
   const focusInput = () => {
     inputRef.current?.focus();
+  };
+
+  const goAddPage = () => {
+    navigation.navigate('AddAuth');
   };
 
   return (
@@ -54,6 +69,12 @@ const Home: FC = () => {
         </View>
       </View>
       <AuthBox />
+      <TouchableOpacity onPress={goAddPage}>
+        <View style={style.addAuth}>
+          <MtIcon name={'plus-circle-outline'} size={25} color={'#BDBDBD'} />
+          <Text style={style.textColor}>Add Address</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -161,6 +182,26 @@ const style = StyleSheet.create({
     borderColor: '#BDBDBD',
     borderWidth: 1,
     borderRadius: 16,
+  },
+
+  addAuth: {
+    position: 'absolute',
+    bottom: 40,
+    right: 20,
+    paddingHorizontal: 15,
+    height: 50,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', // 배경색에 투명도 적용
+    borderRadius: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  textColor: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#BDBDBD',
+    marginLeft: 5,
   },
 });
 
