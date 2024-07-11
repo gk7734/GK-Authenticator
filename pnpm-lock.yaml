@@ -17,6 +17,9 @@ dependencies:
   react-native:
     specifier: 0.74.3
     version: 0.74.3(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(@types/react@18.3.3)(react@18.2.0)
+  react-native-biometrics:
+    specifier: ^3.0.1
+    version: 3.0.1(react-native@0.74.3)
   react-native-camera-kit:
     specifier: ^13.0.0
     version: 13.0.0(react-native@0.74.3)(react@18.2.0)
@@ -6216,6 +6219,14 @@ packages:
 
   /react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
+
+  /react-native-biometrics@3.0.1(react-native@0.74.3):
+    resolution: {integrity: sha512-Ru80gXRa9KG04sl5AB9HyjLjVbduhqZVjA+AiOSGqr+fNqCDmCu9y5WEksnjbnniNLmq1yGcw+qcLXmR1ddLDQ==}
+    peerDependencies:
+      react-native: '>=0.60.0'
+    dependencies:
+      react-native: 0.74.3(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(@types/react@18.3.3)(react@18.2.0)
+    dev: false
 
   /react-native-camera-kit@13.0.0(react-native@0.74.3)(react@18.2.0):
     resolution: {integrity: sha512-fnkyivCG2xzS+14/doP8pCAYNafYaTyg5J0t+JJltJdgKSHf328OG44Rd+fnbbEOydZxgy/bcuLB24R0kCbynw==}

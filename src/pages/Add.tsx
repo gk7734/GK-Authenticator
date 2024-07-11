@@ -24,7 +24,6 @@ const Add: FC = () => {
     Vibration.vibrate();
 
     const scannedCode = event.nativeEvent.codeStringValue;
-    console.log(`Scanned code: ${scannedCode}`);
 
     const decodedCode = decodeURIComponent(scannedCode);
     console.log(`Decoded code: ${decodedCode}`);
@@ -40,7 +39,6 @@ const Add: FC = () => {
       Alert.alert('유효한 QR 코드를 가져오고 다시 시도 하세요.');
       navigation.goBack();
     }
-    console.log(`scanned: ${decodedCode}`);
   };
 
   return (
