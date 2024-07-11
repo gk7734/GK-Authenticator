@@ -3,6 +3,7 @@ import {Alert, Dimensions, StyleSheet, Vibration, View} from 'react-native';
 import {Camera, CameraType} from 'react-native-camera-kit';
 import {useNavigation} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
+import { parseOtpAuthUrl } from "../Typescript/parseOtpAuthUrl.ts";
 
 const Add: FC = () => {
   const [scanned, setScanned] = useState<boolean>(true);
@@ -29,6 +30,8 @@ const Add: FC = () => {
     console.log(`Decoded code: ${decodedCode}`);
 
     if (urlReg.test(decodedCode)) {
+      const data = parseOtpAuthUrl(decodedCode);
+      console.log(data);
       navigation.goBack();
       Toast.show({
         type: 'success',

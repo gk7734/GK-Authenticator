@@ -1,23 +1,34 @@
 export function parseOtpAuthUrl(url: string) {
-  const urlObj = new URL(url);
+  // 'otpauth://totp/' 이후의 부분을 추출
+  const urlPart = url.slice('otpauth://totp/'.length);
+  const [labelPart, queryPart] = urlPart.split('?');
 
-  if (urlObj.protocol !== 'otpauth:') {
-    throw new Error('Invalid URL protocol');
+  // 유저명 추출
+  const user = labelPart.split(':');
+
+  // query 부분을 파싱하여 secret과 issuer 추출
+  function parseQuery(query: string) {
+    const params: {[key: string]: string} = {};
+    const pairs = query.split('&');
+    for (const pair of pairs) {
+      const [key, value] = pair.split('=');
+      params[decodeURIComponent(key)] = decodeURIComponent(value);
+    }
+    return params;
   }
 
-  const pathParts = urlObj.pathname.split(':');
-  const label = pathParts[1];
-  const params = new URLSearchParams(urlObj.search);
-  const secret = params.get('secret');
-  const issuer = params.get('issuer');
+  // 쿼리 문자열에서 secret과 issuer 추출
+  const params = parseQuery(queryPart);
+  const secret = params.secret;
+  const queryIssuer = params.issuer;
 
-  if (!label || !secret || !issuer) {
+  if (!user || !secret || !queryIssuer) {
     throw new Error('Missing required parameters in URL');
   }
 
   return {
-    user: label,
+    user: user[1],
     secret: secret,
-    issuer: issuer,
+    issuer: queryIssuer,
   };
 }
