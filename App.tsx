@@ -5,6 +5,7 @@ import Home from './src/pages/Home.tsx';
 import AppHeader from './src/components/AppHeader.tsx';
 import Add from './src/pages/Add.tsx';
 import Toast from 'react-native-toast-message';
+import QRHeader from './src/components/QRHeader.tsx';
 
 const Stack = createStackNavigator();
 
@@ -19,7 +20,7 @@ export const App: FC = () => {
           <Stack.Screen
             name="AddAuth"
             component={Add}
-            options={{headerShown: false}}
+            options={{headerShown: true, header: () => <QRHeader />}}
           />
         </Stack.Navigator>
       </NavigationContainer>
