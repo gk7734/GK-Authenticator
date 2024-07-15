@@ -1,19 +1,34 @@
 import React, {FC} from 'react';
-import {data} from '../dummy/dummyJSON.ts';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {data} from '../Typescript/dummy/dummyJSON.ts';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import AdIcon from 'react-native-vector-icons/AntDesign';
+import useAuthStore from '../Store/AddAuth.ts';
 
 const AuthBox: FC = () => {
+  const auths = useAuthStore(state => state.auths);
+
   return (
     <ScrollView contentContainerStyle={style.scrollViewContent}>
-      {data.map((item, idx) => {
+      {auths.map((item, idx) => {
         return (
           <View key={idx} style={style.authCenter}>
             <TouchableOpacity style={style.authContainer}>
-              <Image source={{uri: item.icon}} style={style.brandIcon} />
+              <Image
+                source={{
+                  uri: 'https://cdn.brandfetch.io/revolut.com/w/400/h/400',
+                }}
+                style={style.brandIcon}
+              />
               <View style={style.authTextContainer}>
-                <Text style={style.authMainText}>{item.title}</Text>
-                <Text style={style.authSubText}>{item.email}</Text>
+                <Text style={style.authMainText}>{item.issuer}</Text>
+                <Text style={style.authSubText}>{item.user}</Text>
               </View>
               <AdIcon
                 name={'right'}
@@ -86,6 +101,6 @@ const style = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
   },
-})
+});
 
 export default AuthBox;

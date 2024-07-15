@@ -13,6 +13,7 @@ import MtIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AuthBox from '../components/AuthBox.tsx';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
+import useAuthStore from "../Store/AddAuth.ts";
 
 type RootStackParamList = {
   Home: undefined;
@@ -25,6 +26,7 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 const Home: FC = () => {
   const inputRef = useRef<TextInput>(null);
   const navigation = useNavigation<NavigationProp>();
+  const auths = useAuthStore(state => state.auths);
 
   const focusInput = () => {
     inputRef.current?.focus();
@@ -36,7 +38,7 @@ const Home: FC = () => {
 
   return (
     <View style={style.container}>
-      <Text style={style.lgText}>4</Text>
+      <Text style={style.lgText}>{auths.length}</Text>
       <View style={style.mainText}>
         <Icon name={'locked'} size={20} color={'black'} />
         <Text style={style.mainTextText}>Secured Accounts</Text>
