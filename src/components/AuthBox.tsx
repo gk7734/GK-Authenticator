@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-import {data} from '../Typescript/dummy/dummyJSON.ts';
 import {
   Image,
   ScrollView,
@@ -10,16 +9,35 @@ import {
 } from 'react-native';
 import AdIcon from 'react-native-vector-icons/AntDesign';
 import useAuthStore from '../Store/AddAuth.ts';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  AddAuth: undefined;
+  OtpAuth: {user: string; issuer: string; secret: string};
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const AuthBox: FC = () => {
   const auths = useAuthStore(state => state.auths);
+  const navigation = useNavigation<NavigationProp>();
+
+  const goOtpAuthPage = (user: string, issuer: string, secret: string) => {
+    navigation.navigate('OtpAuth', {user, issuer, secret});
+  };
 
   return (
     <ScrollView contentContainerStyle={style.scrollViewContent}>
       {auths.map((item, idx) => {
         return (
           <View key={idx} style={style.authCenter}>
-            <TouchableOpacity style={style.authContainer}>
+            <TouchableOpacity
+              style={style.authContainer}
+              onPress={() =>
+                goOtpAuthPage(item.user, item.issuer, item.secret)
+              }>
               <Image
                 source={{
                   uri: 'https://cdn.brandfetch.io/revolut.com/w/400/h/400',

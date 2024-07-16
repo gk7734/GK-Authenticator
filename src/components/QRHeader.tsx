@@ -9,7 +9,7 @@ const QRHeader: FC = () => {
   return (
     <View style={style.container}>
       <TouchableOpacity style={style.icon} onPress={() => navigation.goBack()}>
-        <Icon name={'chevron-back'} size={35} color={'black'} />
+        <Icon name={'chevron-back'} size={30} color={'black'} />
       </TouchableOpacity>
       <Text style={style.text}>Add Account</Text>
     </View>
@@ -32,7 +32,7 @@ const style = StyleSheet.create({
   },
 
   text: {
-    fontSize: 24,
+    fontSize: 22,
     color: 'black',
     fontWeight: '600',
   },

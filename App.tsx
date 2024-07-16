@@ -6,6 +6,8 @@ import AppHeader from './src/components/AppHeader.tsx';
 import Add from './src/pages/Add.tsx';
 import Toast from 'react-native-toast-message';
 import QRHeader from './src/components/QRHeader.tsx';
+import OtpAuth from './src/pages/OtpAuth.tsx';
+import OtpAuthHeader from './src/components/OtpAuthHeader.tsx';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +23,11 @@ export const App: FC = () => {
             name="AddAuth"
             component={Add}
             options={{headerShown: true, header: () => <QRHeader />}}
+          />
+          <Stack.Screen
+            name="OtpAuth"
+            component={OtpAuth}
+            options={{header: () => <OtpAuthHeader />}}
           />
         </Stack.Navigator>
       </NavigationContainer>

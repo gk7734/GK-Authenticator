@@ -13,7 +13,7 @@ import MtIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AuthBox from '../components/AuthBox.tsx';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
-import useAuthStore from "../Store/AddAuth.ts";
+import useAuthStore from '../Store/AddAuth.ts';
 
 type RootStackParamList = {
   Home: undefined;

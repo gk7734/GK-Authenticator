@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 interface Auth {
   user: string;
   secret: string;
-  issuer?: string;
+  issuer: string;
 }
 
 // AuthStore 인터페이스 정의
