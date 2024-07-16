@@ -31,6 +31,9 @@ dependencies:
   react-native-camera-kit:
     specifier: ^13.0.0
     version: 13.0.0(react-native@0.74.3)(react@18.2.0)
+  react-native-circular-progress:
+    specifier: ^1.4.0
+    version: 1.4.0(react-native-svg@15.3.0)(react-native@0.74.3)(react@18.2.0)
   react-native-gesture-handler:
     specifier: ^2.17.1
     version: 2.17.1(react-native@0.74.3)(react@18.2.0)
@@ -6210,6 +6213,19 @@ packages:
       lodash: 4.17.21
       react: 18.2.0
       react-native: 0.74.3(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(@types/react@18.3.3)(react@18.2.0)
+    dev: false
+
+  /react-native-circular-progress@1.4.0(react-native-svg@15.3.0)(react-native@0.74.3)(react@18.2.0):
+    resolution: {integrity: sha512-JnJE2pvyDVBdIJN49SziDMBmwn6cYTdrWVzpWFzVXzSzouZ9+0+N1nlGFM2zw3gqrJzjL+KktPTUf99IpU5yAg==}
+    peerDependencies:
+      react: '>=16.0.0'
+      react-native: '>=0.50.0'
+      react-native-svg: '>=7.0.0'
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-native: 0.74.3(@babel/core@7.24.7)(@babel/preset-env@7.24.7)(@types/react@18.3.3)(react@18.2.0)
+      react-native-svg: 15.3.0(react-native@0.74.3)(react@18.2.0)
     dev: false
 
   /react-native-gesture-handler@2.17.1(react-native@0.74.3)(react@18.2.0):

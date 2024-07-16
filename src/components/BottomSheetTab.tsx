@@ -1,25 +1,40 @@
-import React, {FC, useMemo} from 'react';
+import React, {FC, useCallback, useMemo} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import IoIcon from 'react-native-vector-icons/Ionicons';
 import MtIcon from 'react-native-vector-icons/MaterialIcons';
 import BottomSheet from '@gorhom/bottom-sheet';
+import {useSharedValue} from 'react-native-reanimated';
 
 interface BottomSheetProps {
   user: string;
   issuer: string;
   secret: string;
+  onPositionChange: (position: number) => void;
 }
 
-const BottomSheetTab: FC<BottomSheetProps> = ({user, issuer, secret}) => {
-  const snapPoints = useMemo(() => ['10%', '50%'], []);
+const BottomSheetTab: FC<BottomSheetProps> = ({
+  user,
+  issuer,
+  secret,
+  onPositionChange,
+}) => {
+  const snapPoints = useMemo(() => ['15%', '77%'], []);
+
+  const handleSheetChanges = useCallback(
+    (index: number) => {
+      onPositionChange(index);
+    },
+    [onPositionChange],
+  );
 
   return (
     <View style={styles.container}>
       <BottomSheet
         snapPoints={snapPoints}
         index={1}
-        backgroundStyle={{backgroundColor: '#FFFFFF'}}>
+        backgroundStyle={{backgroundColor: '#FFFFFF'}}
+        onChange={handleSheetChanges}>
         <View style={styles.mainContainer}>
           <View style={styles.subContainer}>
             <View style={styles.flex}>
