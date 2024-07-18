@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from './src/pages/Home.tsx';
@@ -8,10 +8,28 @@ import Toast from 'react-native-toast-message';
 import QRHeader from './src/components/QRHeader.tsx';
 import OtpAuth from './src/pages/OtpAuth.tsx';
 import OtpAuthHeader from './src/components/OtpAuthHeader.tsx';
+import useAuthStore from './src/Store/AddAuth.ts';
 
 const Stack = createStackNavigator();
 
 export const App: FC = () => {
+  const {timeRemaining, generateOTP, setTimeRemaining} = useAuthStore();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const secondsPassed = new Date().getSeconds();
+      const newTimeRemaining = 30 - (secondsPassed % 30);
+
+      if (newTimeRemaining === 30 || timeRemaining === 0) {
+        generateOTP();
+      }
+
+      setTimeRemaining(newTimeRemaining);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  });
+
   return (
     <>
       <NavigationContainer>

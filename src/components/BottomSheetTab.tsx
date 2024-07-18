@@ -1,10 +1,13 @@
-import React, {FC, useCallback, useMemo} from 'react';
+import React, {FC, useCallback, useMemo, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import IoIcon from 'react-native-vector-icons/Ionicons';
 import MtIcon from 'react-native-vector-icons/MaterialIcons';
 import BottomSheet from '@gorhom/bottom-sheet';
-import {useSharedValue} from 'react-native-reanimated';
+import useAuthStore from '../Store/AddAuth.ts';
+import {useNavigation} from '@react-navigation/native';
+import Clipboard from '@react-native-clipboard/clipboard';
+import Toast from 'react-native-toast-message';
 
 interface BottomSheetProps {
   user: string;
@@ -19,7 +22,22 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
   secret,
   onPositionChange,
 }) => {
-  const snapPoints = useMemo(() => ['15%', '77%'], []);
+  const snapPoints = useMemo(() => ['15%', '92%'], []);
+  const {otpCodes, removeAuth} = useAuthStore();
+  const navigation = useNavigation();
+  const [isShow, setIsShow] = useState(true);
+
+  const copyToClipboard = async () => {
+    try {
+      Clipboard.setString(otpCodes[issuer]);
+    } catch (err) {
+      Toast.show({
+        type: 'error',
+        text1: 'Authenticator',
+        text2: '복사 실패하였습니다.',
+      });
+    }
+  };
 
   const handleSheetChanges = useCallback(
     (index: number) => {
@@ -27,6 +45,19 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
     },
     [onPositionChange],
   );
+
+  const deleteAuth = () => {
+    removeAuth(secret);
+    navigation.goBack();
+  };
+
+  const onOtpShow = () => {
+    if (isShow === true) {
+      setIsShow(false);
+    } else {
+      setIsShow(true);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -46,7 +77,7 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
               />
               <Text style={styles.text}>{issuer}</Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={deleteAuth}>
               <Icon name={'trash-2'} size={30} color={'#989898'} />
             </TouchableOpacity>
           </View>
@@ -59,7 +90,9 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
             }}>
             <View style={styles.card}>
               <View>
-                <Text style={styles.boldText}>170825</Text>
+                <Text style={styles.boldText}>
+                  {isShow ? otpCodes[issuer] : '*****'}
+                </Text>
                 <Text style={styles.normalText}>{user}</Text>
               </View>
               <View
@@ -71,10 +104,12 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
                   alignItems: 'center',
                   gap: 20,
                 }}>
-                <TouchableOpacity style={styles.cardBox}>
+                <TouchableOpacity
+                  style={styles.cardBox}
+                  onPress={copyToClipboard}>
                   <IoIcon name={'copy-outline'} size={30} color={'#292929'} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.cardBox}>
+                <TouchableOpacity style={styles.cardBox} onPress={onOtpShow}>
                   <MtIcon name={'visibility-off'} size={30} color={'#292929'} />
                 </TouchableOpacity>
               </View>

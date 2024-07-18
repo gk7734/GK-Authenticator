@@ -1,8 +1,9 @@
-import React, { FC, useCallback, useRef } from "react";
-import {StyleSheet, Text, View, Animated} from 'react-native';
+import React, {FC, useCallback, useRef} from 'react';
+import {StyleSheet, Text, View, Animated, Image} from 'react-native';
 import BottomSheetTab from '../components/BottomSheetTab.tsx';
 import {RouteProp} from '@react-navigation/native';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
+import useAuthStore from '../Store/AddAuth.ts';
 
 type RootStackParamList = {
   OtpAuth: {
@@ -20,6 +21,7 @@ interface OtpAuthProps {
 
 const OtpAuth: FC<OtpAuthProps> = ({route}) => {
   const animatedPosition = useRef(new Animated.Value(0)).current;
+  const timeRemaining = useAuthStore(state => state.timeRemaining);
 
   const circularProgressStyle = {
     transform: [
@@ -45,15 +47,33 @@ const OtpAuth: FC<OtpAuthProps> = ({route}) => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.center, circularProgressStyle]}>
+        <View
+          style={{
+            justifyContent: 'flex-start',
+            display: 'flex',
+            alignItems: 'center',
+            top: 65,
+          }}>
+          <Image
+            source={{
+              uri: 'https://cdn.brandfetch.io/revolut.com/w/400/h/400',
+            }}
+            style={styles.brandIcon}
+          />
+        </View>
         <AnimatedCircularProgress
           size={250}
-          width={22}
-          fill={0}
-          tintColor="#00e0ff"
-          backgroundColor="#3d5875"
-          duration={30000}
-          prefill={0}
+          width={18}
+          fill={(timeRemaining / 30) * 100}
+          padding={20}
+          tintColor={'#292929'} // 진행 바 색상
+          backgroundColor={'#FCE18B'} // 남 부분 색상
+          backgroundWidth={10}
+          lineCap={'round'}
+          duration={1000}
         />
+        <Text style={styles.boldText}>{timeRemaining}</Text>
+        <Text style={styles.normalText}>Seconds</Text>
       </Animated.View>
       <BottomSheetTab
         user={route.params.user}
@@ -75,14 +95,34 @@ const styles = StyleSheet.create({
     color: 'black',
   },
 
+  boldText: {
+    marginTop: 10,
+    fontSize: 28,
+    letterSpacing: 1,
+    fontWeight: '800',
+    color: '#292929',
+  },
+
+  normalText: {
+    fontSize: 15,
+    color: '#292929',
+  },
+
   center: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: 30,
   },
   contentContainer: {
     flex: 1,
     alignItems: 'center',
+  },
+
+  brandIcon: {
+    position: 'absolute',
+    width: 140,
+    height: 140,
+    borderRadius: 100,
   },
 });
 

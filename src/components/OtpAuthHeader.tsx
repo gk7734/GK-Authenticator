@@ -3,7 +3,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MtIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
-import { NativeStackNavigationProp } from "react-native-screens/native-stack";
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
 
 type RootStackParamList = {
   Home: undefined;
