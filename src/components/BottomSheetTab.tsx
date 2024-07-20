@@ -22,7 +22,7 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
   secret,
   onPositionChange,
 }) => {
-  const snapPoints = useMemo(() => ['15%', '92%'], []);
+  const snapPoints: string[] = useMemo(() => ['15%', '92%'], []);
   const {otpCodes, removeAuth} = useAuthStore();
   const navigation = useNavigation();
   const [isShow, setIsShow] = useState(true);
@@ -52,7 +52,7 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
   };
 
   const onOtpShow = () => {
-    if (isShow === true) {
+    if (isShow) {
       setIsShow(false);
     } else {
       setIsShow(true);
@@ -91,7 +91,11 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
             <View style={styles.card}>
               <View>
                 <Text style={styles.boldText}>
-                  {isShow ? otpCodes[issuer] : '*****'}
+                  {isShow
+                    ? otpCodes[issuer].length > 0
+                      ? otpCodes[issuer]
+                      : 'Loading...'
+                    : '*****'}
                 </Text>
                 <Text style={styles.normalText}>{user}</Text>
               </View>
@@ -110,7 +114,15 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
                   <IoIcon name={'copy-outline'} size={30} color={'#292929'} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.cardBox} onPress={onOtpShow}>
-                  <MtIcon name={'visibility-off'} size={30} color={'#292929'} />
+                  {isShow ? (
+                    <MtIcon
+                      name={'visibility-off'}
+                      size={30}
+                      color={'#292929'}
+                    />
+                  ) : (
+                    <MtIcon name={'visibility'} size={30} color={'#292929'} />
+                  )}
                 </TouchableOpacity>
               </View>
             </View>

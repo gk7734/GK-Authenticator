@@ -1,12 +1,18 @@
 import React, {FC} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const AddAuth: FC = () => {
+interface AddAuthProps {
+  link: () => void;
+}
+
+const AddAuth: FC<AddAuthProps> = ({link}) => {
   return (
-    <View style={style.addAuth}>
-      <Icon name={'add-circle-outline'} size={25} color={'#BDBDBD'} />
-      <Text style={style.textColor}>Add Address</Text>
+    <View>
+      <TouchableOpacity onPress={link} style={style.addAuth}>
+        <Icon name={'add-circle-outline'} size={25} color={'#BDBDBD'} />
+        <Text style={style.textColor}>Add Address</Text>
+      </TouchableOpacity>
     </View>
   );
 };

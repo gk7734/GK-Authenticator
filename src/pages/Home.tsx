@@ -14,6 +14,7 @@ import AuthBox from '../components/AuthBox.tsx';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
 import useAuthStore from '../Store/AddAuth.ts';
+import AddAuth from '../components/AddAuth.tsx';
 
 type RootStackParamList = {
   Home: undefined;
@@ -71,12 +72,7 @@ const Home: FC = () => {
         </View>
       </View>
       <AuthBox />
-      <TouchableOpacity onPress={goAddPage}>
-        <View style={style.addAuth}>
-          <MtIcon name={'plus-circle-outline'} size={25} color={'#BDBDBD'} />
-          <Text style={style.textColor}>Add Address</Text>
-        </View>
-      </TouchableOpacity>
+      <AddAuth link={goAddPage} />
     </View>
   );
 };

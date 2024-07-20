@@ -63,7 +63,7 @@ const OtpAuth: FC<OtpAuthProps> = ({route}) => {
         </View>
         <AnimatedCircularProgress
           size={250}
-          width={18}
+          width={16}
           fill={(timeRemaining / 30) * 100}
           padding={20}
           tintColor={'#292929'} // 진행 바 색상
