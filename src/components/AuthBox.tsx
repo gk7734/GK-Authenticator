@@ -21,7 +21,11 @@ type RootStackParamList = {
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
-const AuthBox: FC = () => {
+interface AuthBoxProps {
+  search: string;
+}
+
+const AuthBox: FC<AuthBoxProps> = ({search}) => {
   const auths = useAuthStore(state => state.auths);
   const setAuthDetail = useAuthDetailStore(state => state.setAuthDetail);
   const navigation = useNavigation<NavigationProp>();
@@ -36,9 +40,13 @@ const AuthBox: FC = () => {
     setAuthDetail(user, issuer, icon, secret);
   };
 
+  const filteredAuths = auths.filter(item =>
+    item.issuer.toLowerCase().includes(search.toLowerCase()),
+  );
+
   return (
     <ScrollView contentContainerStyle={style.scrollViewContent}>
-      {auths.map((item, idx) => {
+      {filteredAuths.map((item, idx) => {
         return (
           <View key={idx} style={style.authCenter}>
             <TouchableOpacity

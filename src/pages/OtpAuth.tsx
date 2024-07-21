@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Animated, Image} from 'react-native';
 import BottomSheetTab from '../components/BottomSheetTab.tsx';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import useAuthStore from '../Store/AddAuth.ts';
-import DelateModal from '../components/DelateModal.tsx';
+import DeleteModal from '../components/DelateModal.tsx';
 
 const OtpAuth: FC = () => {
   const animatedPosition = useRef(new Animated.Value(0)).current;
@@ -56,7 +56,7 @@ const OtpAuth: FC = () => {
         <Text style={styles.normalText}>Seconds</Text>
       </Animated.View>
       <BottomSheetTab onPositionChange={handleSheetPositionChange} />
-      <DelateModal />
+      <DeleteModal />
     </View>
   );
 };
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
   normalText: {
     fontSize: 15,
-    fontFamily: 'Pretendard-Regular',
+    fontFamily: 'Pretendard-Medium',
     color: '#292929',
   },
   center: {

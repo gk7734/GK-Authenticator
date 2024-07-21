@@ -31,7 +31,7 @@ export const App = () => {
   const [biometricAuthenticated, setBiometricAuthenticated] = useState(false);
 
   const updateTimeRemaining = useCallback(() => {
-    const now = new Date();
+    const now: Date = new Date();
     const secondsPassed = now.getSeconds();
     const newTimeRemaining = 30 - (secondsPassed % 30);
     setTimeRemaining(newTimeRemaining);
@@ -78,7 +78,6 @@ export const App = () => {
 
       if (result) {
         setBiometricAuthenticated(true);
-
       } else {
         console.log('Biometric authentication failed');
         setBiometricAuthenticated(false);
@@ -149,8 +148,7 @@ const styles = StyleSheet.create({
   mainText: {
     marginTop: 10,
     fontSize: 24,
-    fontWeight: '600',
-    fontFamily: 'Pretendard',
+    fontFamily: 'Pretendard-Medium',
     color: '#1E90FF',
   },
 
@@ -159,8 +157,7 @@ const styles = StyleSheet.create({
   },
 
   subText: {
-    fontWeight: '700',
-    fontFamily: 'Pretendard',
+    fontFamily: 'Pretendard-Bold',
     color: '#1E90FF',
     fontSize: 14,
     marginBottom: 40,

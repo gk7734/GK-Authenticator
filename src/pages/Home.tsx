@@ -28,6 +28,7 @@ const Home: FC = () => {
   const inputRef = useRef<TextInput>(null);
   const navigation = useNavigation<NavigationProp>();
   const auths = useAuthStore(state => state.auths);
+  const [search, setSearch] = React.useState('');
 
   const focusInput = () => {
     inputRef.current?.focus();
@@ -57,8 +58,12 @@ const Home: FC = () => {
             <TextInput
               ref={inputRef}
               style={style.textInputText}
+              value={search}
+              onChangeText={text => setSearch(text)}
               placeholder={'Search your accounts..'}
               placeholderTextColor={'#989898'}
+              numberOfLines={1} // 줄 수를 1로 설정
+              multiline={false} // 여러 줄 입력 방지
             />
           </TouchableOpacity>
         </View>
@@ -71,7 +76,7 @@ const Home: FC = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <AuthBox />
+      <AuthBox search={search} />
       <AddAuth link={goAddPage} />
     </View>
   );
@@ -153,9 +158,11 @@ const style = StyleSheet.create({
 
   textInputText: {
     color: 'black',
-    fontSize: 12,
+    fontSize: 14, // 폰트 크기를 약간 키워줌
     fontFamily: 'Pretendard-Regular',
-    marginLeft: 4,
+    marginLeft: 2,
+    flex: 1, // 남은 공간을 차지하도록 설정
+    textAlignVertical: 'center', // 텍스트 수직 정렬
   },
 
   image: {
