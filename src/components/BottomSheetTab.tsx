@@ -5,27 +5,21 @@ import IoIcon from 'react-native-vector-icons/Ionicons';
 import MtIcon from 'react-native-vector-icons/MaterialIcons';
 import BottomSheet from '@gorhom/bottom-sheet';
 import useAuthStore from '../Store/AddAuth.ts';
-import {useNavigation} from '@react-navigation/native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Toast from 'react-native-toast-message';
+import {useModalStore} from '../Store/Modal.ts';
+import {useAuthDetailStore} from '../Store/AuthDetail.ts';
 
 interface BottomSheetProps {
-  user: string;
-  issuer: string;
-  secret: string;
   onPositionChange: (position: number) => void;
 }
 
-const BottomSheetTab: FC<BottomSheetProps> = ({
-  user,
-  issuer,
-  secret,
-  onPositionChange,
-}) => {
+const BottomSheetTab: FC<BottomSheetProps> = ({onPositionChange}) => {
   const snapPoints: string[] = useMemo(() => ['15%', '92%'], []);
-  const {otpCodes, removeAuth} = useAuthStore();
-  const navigation = useNavigation();
+  const {otpCodes} = useAuthStore();
   const [isShow, setIsShow] = useState(true);
+  const setIsOpen = useModalStore(state => state.setIsOpen);
+  const {user, issuer} = useAuthDetailStore();
 
   const copyToClipboard = async () => {
     try {
@@ -46,17 +40,8 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
     [onPositionChange],
   );
 
-  const deleteAuth = () => {
-    removeAuth(secret);
-    navigation.goBack();
-  };
-
   const onOtpShow = () => {
-    if (isShow) {
-      setIsShow(false);
-    } else {
-      setIsShow(true);
-    }
+    setIsShow(!isShow);
   };
 
   return (
@@ -77,7 +62,7 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
               />
               <Text style={styles.text}>{issuer}</Text>
             </View>
-            <TouchableOpacity onPress={deleteAuth}>
+            <TouchableOpacity onPress={() => setIsOpen(true)}>
               <Icon name={'trash-2'} size={30} color={'#989898'} />
             </TouchableOpacity>
           </View>
@@ -92,7 +77,7 @@ const BottomSheetTab: FC<BottomSheetProps> = ({
               <View>
                 <Text style={styles.boldText}>
                   {isShow
-                    ? otpCodes[issuer].length > 0
+                    ? otpCodes[issuer] !== undefined && otpCodes[issuer] !== '0'
                       ? otpCodes[issuer]
                       : 'Loading...'
                     : '*****'}
@@ -210,7 +195,7 @@ const styles = StyleSheet.create({
     width: 65,
     height: 65,
     borderRadius: 15,
-    borderColor: '#EFEFEF',
+    borderColor: '#DCDCDC',
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',

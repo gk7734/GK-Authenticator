@@ -1,25 +1,11 @@
 import React, {FC, useCallback, useRef} from 'react';
 import {StyleSheet, Text, View, Animated, Image} from 'react-native';
 import BottomSheetTab from '../components/BottomSheetTab.tsx';
-import {RouteProp} from '@react-navigation/native';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import useAuthStore from '../Store/AddAuth.ts';
+import DelateModal from '../components/DelateModal.tsx';
 
-type RootStackParamList = {
-  OtpAuth: {
-    user: string;
-    issuer: string;
-    secret: string;
-  };
-};
-
-type OtpAuthRouteProp = RouteProp<RootStackParamList, 'OtpAuth'>;
-
-interface OtpAuthProps {
-  route: OtpAuthRouteProp;
-}
-
-const OtpAuth: FC<OtpAuthProps> = ({route}) => {
+const OtpAuth: FC = () => {
   const animatedPosition = useRef(new Animated.Value(0)).current;
   const timeRemaining = useAuthStore(state => state.timeRemaining);
 
@@ -28,7 +14,7 @@ const OtpAuth: FC<OtpAuthProps> = ({route}) => {
       {
         translateY: animatedPosition.interpolate({
           inputRange: [0, 1],
-          outputRange: [150, 0], // 조정 가능한 값
+          outputRange: [150, 0],
         }),
       },
     ],
@@ -47,13 +33,7 @@ const OtpAuth: FC<OtpAuthProps> = ({route}) => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.center, circularProgressStyle]}>
-        <View
-          style={{
-            justifyContent: 'flex-start',
-            display: 'flex',
-            alignItems: 'center',
-            top: 65,
-          }}>
+        <View style={styles.imageContainer}>
           <Image
             source={{
               uri: 'https://cdn.brandfetch.io/revolut.com/w/400/h/400',
@@ -66,8 +46,8 @@ const OtpAuth: FC<OtpAuthProps> = ({route}) => {
           width={16}
           fill={(timeRemaining / 30) * 100}
           padding={20}
-          tintColor={'#292929'} // 진행 바 색상
-          backgroundColor={'#FCE18B'} // 남 부분 색상
+          tintColor={'#292929'}
+          backgroundColor={'#FCE18B'}
           backgroundWidth={10}
           lineCap={'round'}
           duration={1000}
@@ -75,12 +55,8 @@ const OtpAuth: FC<OtpAuthProps> = ({route}) => {
         <Text style={styles.boldText}>{timeRemaining}</Text>
         <Text style={styles.normalText}>Seconds</Text>
       </Animated.View>
-      <BottomSheetTab
-        user={route.params.user}
-        issuer={route.params.issuer}
-        secret={route.params.secret}
-        onPositionChange={handleSheetPositionChange}
-      />
+      <BottomSheetTab onPositionChange={handleSheetPositionChange} />
+      <DelateModal />
     </View>
   );
 };
@@ -90,11 +66,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FBCE58',
   },
-
-  text: {
-    color: 'black',
+  imageContainer: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    top: 65,
   },
-
   boldText: {
     marginTop: 10,
     fontSize: 28,
@@ -102,22 +78,15 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: '#292929',
   },
-
   normalText: {
     fontSize: 15,
     color: '#292929',
   },
-
   center: {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 30,
   },
-  contentContainer: {
-    flex: 1,
-    alignItems: 'center',
-  },
-
   brandIcon: {
     position: 'absolute',
     width: 140,

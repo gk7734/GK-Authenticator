@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useCallback, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from './src/pages/Home.tsx';
@@ -13,22 +13,26 @@ import useAuthStore from './src/Store/AddAuth.ts';
 const Stack = createStackNavigator();
 
 export const App: FC = () => {
-  const {timeRemaining, generateOTP, setTimeRemaining} = useAuthStore();
+  const {generateOTP, setTimeRemaining} = useAuthStore();
+
+  const updateTimeRemaining = useCallback(() => {
+    const now = new Date();
+    const secondsPassed = now.getSeconds();
+    const newTimeRemaining = 30 - (secondsPassed % 30);
+    setTimeRemaining(newTimeRemaining);
+
+    if (newTimeRemaining === 30 || newTimeRemaining === 0) {
+      generateOTP();
+    }
+  }, [generateOTP, setTimeRemaining]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const secondsPassed = new Date().getSeconds();
-      const newTimeRemaining = 30 - (secondsPassed % 30);
+    updateTimeRemaining(); // 초기 실행
 
-      if (newTimeRemaining === 30 || timeRemaining === 0) {
-        generateOTP();
-      }
+    const intervalId = setInterval(updateTimeRemaining, 1000);
 
-      setTimeRemaining(newTimeRemaining);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  });
+    return () => clearInterval(intervalId);
+  }, [updateTimeRemaining]);
 
   return (
     <>

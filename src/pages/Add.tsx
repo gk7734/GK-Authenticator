@@ -9,7 +9,7 @@ import useAuthStore from '../Store/AddAuth.ts';
 const Add: FC = () => {
   const [scanned, setScanned] = useState<boolean>(true);
   const ref = useRef(null);
-  const addAccount = useAuthStore(state => state.addAuth);
+  const {addAuth, auths} = useAuthStore();
   const navigation = useNavigation();
   const urlReg: RegExp =
     /^otpauth:\/\/totp\/([^?]+)\?secret=([A-Z2-7a-z2-7]+)(&issuer=([^&]+))?(&algorithm=(SHA1|SHA256|SHA512))?(&digits=(6|8))?(&period=(\d+))?$/;
@@ -33,8 +33,8 @@ const Add: FC = () => {
 
     if (urlReg.test(decodedCode)) {
       const data = parseOtpAuthUrl(decodedCode);
-      console.log(data);
-      addAccount(data);
+      console.log(auths);
+      addAuth(data);
       navigation.goBack();
       Toast.show({
         type: 'success',

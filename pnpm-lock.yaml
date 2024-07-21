@@ -15,7 +15,7 @@ dependencies:
     version: 4.6.3(patch_hash=lwp3z7ltcwyz4er6sgiqxogdae)(@types/react@18.3.3)(react-native-gesture-handler@2.17.1)(react-native-reanimated@3.14.0)(react-native@0.74.3)(react@18.2.0)
   '@react-native-clipboard/clipboard':
     specifier: ^1.14.1
-    version: 1.14.1(react-native-macos@0.73.33)(react-native-windows@0.73.16)(react-native@0.74.3)(react@18.2.0)
+    version: 1.14.1(react-native-macos@0.73.33)(react-native-windows@0.74.11)(react-native@0.74.3)(react@18.2.0)
   '@react-native-community/cli-platform-android':
     specifier: ^13.6.9
     version: 13.6.9
@@ -88,6 +88,9 @@ dependencies:
   react-native-screens:
     specifier: ^3.32.0
     version: 3.32.0(react-native@0.74.3)(react@18.2.0)
+  react-native-shadow-2:
+    specifier: ^7.1.0
+    version: 7.1.0(react-native-svg@15.4.0)(react-native@0.74.3)
   react-native-svg:
     specifier: ^15.4.0
     version: 15.4.0(react-native@0.74.3)(react@18.2.0)
@@ -97,6 +100,9 @@ dependencies:
   react-native-vector-icons:
     specifier: ^10.1.0
     version: 10.1.0
+  react-native-windows:
+    specifier: ^0.74.11
+    version: 0.74.11(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(@types/react@18.3.3)(react-native@0.74.3)(react@18.2.0)
   readable-stream:
     specifier: ^4.5.2
     version: 4.5.2
@@ -186,6 +192,15 @@ packages:
     resolution: {integrity: sha512-nBrLsEWm4J2u5LpAPjxADTlq3trDgVZZXHNKabeXZtpq3d3AbN/KGO82R87rdDz5/lYB024rtEf10/q0urNgsA==}
     engines: {node: '>=18.0.0'}
     dependencies:
+      tslib: 2.6.3
+    dev: false
+
+  /@azure/core-auth@1.5.0:
+    resolution: {integrity: sha512-udzoBuYG1VBoHVohDTrvKjyzel34zt77Bhp7dQntVGGD0ehVq48owENbBG8fIgkHRNUBQH5k1r0hpoMu5L8+kw==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      '@azure/abort-controller': 1.1.0
+      '@azure/core-util': 1.2.0
       tslib: 2.6.3
     dev: false
 
@@ -2200,7 +2215,7 @@ packages:
       react-native: 0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(@types/react@18.3.3)(react@18.2.0)
     dev: true
 
-  /@react-native-clipboard/clipboard@1.14.1(react-native-macos@0.73.33)(react-native-windows@0.73.16)(react-native@0.74.3)(react@18.2.0):
+  /@react-native-clipboard/clipboard@1.14.1(react-native-macos@0.73.33)(react-native-windows@0.74.11)(react-native@0.74.3)(react@18.2.0):
     resolution: {integrity: sha512-SM3el0A28SwoeJljVNhF217o0nI4E7RfalLmuRQcT1/7tGcxUjgFa3jyrEndYUct8/uxxK5EUNGUu1YEDqzxqw==}
     peerDependencies:
       react: 16.9.0 || 16.11.0 || 16.13.1 || 17.0.1 || 17.0.2 || 18.0.0 || 18.1.0 || 18.2.0
@@ -2211,7 +2226,7 @@ packages:
       react: 18.2.0
       react-native: 0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(@types/react@18.3.3)(react@18.2.0)
       react-native-macos: 0.73.33(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(react-native@0.74.3)(react@18.2.0)
-      react-native-windows: 0.73.16(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(react-native@0.74.3)(react@18.2.0)
+      react-native-windows: 0.74.11(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(@types/react@18.3.3)(react-native@0.74.3)(react@18.2.0)
     dev: false
 
   /@react-native-community/cli-clean@12.3.6:
@@ -2553,16 +2568,16 @@ packages:
       react-native: 0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(@types/react@18.3.3)(react@18.2.0)
     dev: false
 
-  /@react-native-windows/cli@0.73.5(react-native@0.74.3):
-    resolution: {integrity: sha512-/z7kkn4ZUP7pkbNm8gOa2kasdtrk+MwfYXKRiSzgWkiZyOVPYw7tHraT3cHp25mrl0aHDwayAg8GTz4rkcvvJw==}
+  /@react-native-windows/cli@0.74.1(react-native@0.74.3):
+    resolution: {integrity: sha512-lbsJvzOvmPzewJaCMQPrACnzKTdHbPxa7CRka6d+e2PNV0222kn7mrdBRJ8grtZhmK9ZRvZ3DDSjU+eWy77Ixg==}
     engines: {node: '>= 18'}
     peerDependencies:
       react-native: '*'
     dependencies:
-      '@react-native-windows/codegen': 0.73.2(react-native@0.74.3)
-      '@react-native-windows/fs': 0.73.1
-      '@react-native-windows/package-utils': 0.73.1
-      '@react-native-windows/telemetry': 0.73.2
+      '@react-native-windows/codegen': 0.74.1(react-native@0.74.3)
+      '@react-native-windows/fs': 0.74.0
+      '@react-native-windows/package-utils': 0.74.0
+      '@react-native-windows/telemetry': 0.74.0
       '@xmldom/xmldom': 0.7.13
       chalk: 4.1.2
       cli-spinners: 2.9.2
@@ -2586,14 +2601,14 @@ packages:
       - supports-color
     dev: false
 
-  /@react-native-windows/codegen@0.73.2(react-native@0.74.3):
-    resolution: {integrity: sha512-1AJhU/2p3BmQYylBxh22FeDd4ZGhFobpfsxs4CJjgjE7WrZNxm/g1QnzzbMLMmJkzDkSyIu0tS3z5ZuDQqBIcA==}
+  /@react-native-windows/codegen@0.74.1(react-native@0.74.3):
+    resolution: {integrity: sha512-YgnpETdffNVWZn26iBv2JpFZNgrSGThhn/SagFibbAHUiRNdW5GXuZtyJJlm4JP0vYnBQ7iuPQfaRFos7vvKDQ==}
     engines: {node: '>= 18'}
     hasBin: true
     peerDependencies:
       react-native: '*'
     dependencies:
-      '@react-native-windows/fs': 0.73.1
+      '@react-native-windows/fs': 0.74.0
       chalk: 4.1.2
       globby: 11.1.0
       mustache: 4.2.0
@@ -2602,38 +2617,37 @@ packages:
       yargs: 16.2.0
     dev: false
 
-  /@react-native-windows/find-repo-root@0.73.1:
-    resolution: {integrity: sha512-CsYidJxvJYIUmbqgrzZEWbVnZjvY4CpfVXlNKhi1BpYj0F26eCAHNHYS38QS+9FIoy+YOyE+jEoTsGVhXkXmOA==}
+  /@react-native-windows/find-repo-root@0.74.0:
+    resolution: {integrity: sha512-6dxkKX+mtT+yXuTDUf7A+ZQnyX57WlYk3fDNeNTpI66xBR4QuRwPdzTNamZxvX6JEMSe4lm4PqXWlfAKYzPENw==}
     engines: {node: '>= 18'}
     dependencies:
-      '@react-native-windows/fs': 0.73.1
+      '@react-native-windows/fs': 0.74.0
       find-up: 4.1.0
     dev: false
 
-  /@react-native-windows/fs@0.73.1:
-    resolution: {integrity: sha512-FVJeyc1uRJguEdwWsucrOnRWQOB3JlRapPqL3EKUO/i1TX0Fbd8b8MCb9pjCOihoHnN0+aCY9Y8aSar2M33kAw==}
-    engines: {node: '>= 18'}
+  /@react-native-windows/fs@0.74.0:
+    resolution: {integrity: sha512-YK8CkNHSwskU3PPCPTw1DPen3/QXS7qP7rAp+FNK4LfyOgiO1V9TiIyz3DcvqOsD+iwriXoEl/3Bvo/8HmlTbQ==}
     dependencies:
       graceful-fs: 4.2.11
     dev: false
 
-  /@react-native-windows/package-utils@0.73.1:
-    resolution: {integrity: sha512-psr0ESygZWJoyCXreRzOOJa7cIWuZ5btrpeMYvoFej1p/CaJA65pLHuFiFaFi580KkHFvHJYG8mY3K4PDzqctA==}
+  /@react-native-windows/package-utils@0.74.0:
+    resolution: {integrity: sha512-b7c2/DycLM3MK7K6Y4XVuKFBTLvyg0DSP7++f/yZsBWyCysFycAS5gCrlVbXk6Kez3CIEspSS7op+GJMduMp8g==}
     engines: {node: '>= 18'}
     dependencies:
-      '@react-native-windows/find-repo-root': 0.73.1
-      '@react-native-windows/fs': 0.73.1
+      '@react-native-windows/find-repo-root': 0.74.0
+      '@react-native-windows/fs': 0.74.0
       get-monorepo-packages: 1.2.0
       lodash: 4.17.21
     dev: false
 
-  /@react-native-windows/telemetry@0.73.2:
-    resolution: {integrity: sha512-QOo5t6aiO+BlPdJgQGYY/9IWtOkI4h/YoAYbpuFsMsLfBuyzM+5yovoeamIf5Cd9zFYM0YUswZ0VJx4Q7zP4zQ==}
-    engines: {node: '>= 18'}
+  /@react-native-windows/telemetry@0.74.0:
+    resolution: {integrity: sha512-80vMPWXLJpa3v+vAafXjCQM0GFE3Iq8breRkrwzmbANAfCEXoJdOI0Aju0sOqDyiE68OUekjU9lwWbIyFEQGJQ==}
     dependencies:
-      '@react-native-windows/fs': 0.73.1
+      '@azure/core-auth': 1.5.0
+      '@react-native-windows/fs': 0.74.0
       '@xmldom/xmldom': 0.7.13
-      applicationinsights: 2.7.3
+      applicationinsights: 2.9.1
       ci-info: 3.9.0
       envinfo: 7.13.0
       lodash: 4.17.21
@@ -2652,6 +2666,10 @@ packages:
   /@react-native/assets-registry@0.74.85:
     resolution: {integrity: sha512-59YmIQxfGDw4aP9S/nAM+sjSFdW8fUP6fsqczCcXgL2YVEjyER9XCaUT0J1K+PdHep8pi05KUgIKUds8P3jbmA==}
     engines: {node: '>=18'}
+
+  /@react-native/assets@1.0.0:
+    resolution: {integrity: sha512-KrwSpS1tKI70wuKl68DwJZYEvXktDHdZMG0k2AXD/rJVSlB23/X2CB2cutVR0HwNMJIal9HOUOBB2rVfa6UGtQ==}
+    dev: false
 
   /@react-native/babel-plugin-codegen@0.73.4(@babel/preset-env@7.24.8):
     resolution: {integrity: sha512-XzRd8MJGo4Zc5KsphDHBYJzS1ryOHg8I2gOZDAUCGcwLFhdyGu1zBNDJYH2GFyDrInn9TzAbRIf3d4O+eltXQQ==}
@@ -3022,17 +3040,6 @@ packages:
   /@react-native/typescript-config@0.74.85:
     resolution: {integrity: sha512-FiMIWSRPCEW6yobrzAL2GR4a5PMyRpJEUsKkN7h5J2dpM/f33FLZdDon/ljIK2iPB4XOt6m1opUxep9ZqjToDg==}
     dev: true
-
-  /@react-native/virtualized-lists@0.73.4(react-native@0.74.3):
-    resolution: {integrity: sha512-HpmLg1FrEiDtrtAbXiwCgXFYyloK/dOIPIuWW3fsqukwJEWAiTzm1nXGJ7xPU5XTHiWZ4sKup5Ebaj8z7iyWog==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      react-native: '*'
-    dependencies:
-      invariant: 2.2.4
-      nullthrows: 1.1.1
-      react-native: 0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(@types/react@18.3.3)(react@18.2.0)
-    dev: false
 
   /@react-native/virtualized-lists@0.74.85(@types/react@18.3.3)(react-native@0.74.3)(react@18.2.0):
     resolution: {integrity: sha512-jx2Zw0qlZteoQ+0KxRc7s4drsljLBEP534FaNZ950e9+CN9nVkLsV6rigcTjDR8wjKMSBWhKf0C0C3egYz7Ehg==}
@@ -3597,8 +3604,8 @@ packages:
   /appdirsjs@1.2.7:
     resolution: {integrity: sha512-Quji6+8kLBC3NnBeo14nPDq0+2jUs5s3/xEye+udFHumHhRk4M7aAMXp/PBJqkKYGuuyR9M/6Dq7d2AViiGmhw==}
 
-  /applicationinsights@2.7.3:
-    resolution: {integrity: sha512-JY8+kTEkjbA+kAVNWDtpfW2lqsrDALfDXuxOs74KLPu2y13fy/9WB52V4LfYVTVcW1/jYOXjTxNS2gPZIDh1iw==}
+  /applicationinsights@2.9.1:
+    resolution: {integrity: sha512-hrpe/OvHFZlq+SQERD1fxaYICyunxzEBh9SolJebzYnIXkyA9zxIR87dZAh+F3+weltbqdIP8W038cvtpMNhQg==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
       applicationinsights-native-metrics: '*'
@@ -4280,6 +4287,10 @@ packages:
     dependencies:
       color-convert: 2.0.1
       color-string: 1.9.1
+    dev: false
+
+  /colord@2.9.2:
+    resolution: {integrity: sha512-Uqbg+J445nc1TKn4FoDPS6ZZqAvEDnwrH42yo8B40JSOgSLxMZ/gt3h4nmCtPLQeXhjJJkqBx7SCY35WnIixaQ==}
     dev: false
 
   /colorette@1.4.0:
@@ -7981,6 +7992,17 @@ packages:
       warn-once: 0.1.1
     dev: false
 
+  /react-native-shadow-2@7.1.0(react-native-svg@15.4.0)(react-native@0.74.3):
+    resolution: {integrity: sha512-Ph7/E8XuM7QQJ0fNTPC0Xp+8ezntVnCF0XnOQBvmQIDTrYLq/fzQSOdqTC4dzs+pXtZ7Yis2ewjVaDc5URUCAg==}
+    peerDependencies:
+      react-native: '*'
+      react-native-svg: '>=12.1.0'
+    dependencies:
+      colord: 2.9.2
+      react-native: 0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(@types/react@18.3.3)(react@18.2.0)
+      react-native-svg: 15.4.0(react-native@0.74.3)(react@18.2.0)
+    dev: false
+
   /react-native-svg@15.4.0(react-native@0.74.3)(react@18.2.0):
     resolution: {integrity: sha512-zkBEbme/Dba4yqreg/oI2P6/6LrLywWY7HhaSwpU7Pb5COpTd2fV6/ShsgZz8GRFFdidUPwWmx01FITUsjhkmw==}
     peerDependencies:
@@ -8012,32 +8034,34 @@ packages:
       yargs: 16.2.0
     dev: false
 
-  /react-native-windows@0.73.16(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(react-native@0.74.3)(react@18.2.0):
-    resolution: {integrity: sha512-7HG3uQx+RnJ3jLuLRVnwjeqOvS+dt9xStGNByl5OuhY7L1q2zTY/Dm94+2ZSjs3zglnlTJv3Laobd+i5IUiL/g==}
+  /react-native-windows@0.74.11(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(@types/react@18.3.3)(react-native@0.74.3)(react@18.2.0):
+    resolution: {integrity: sha512-t4wqvbK6XEJSjbCGKu5jAKV/FVBHjOKiZeKWGx5MmAVKkJ9XtNqKmqgVP+kuUmE1/baEIvEwSOyByfCgwwh21w==}
     engines: {node: '>= 18'}
     peerDependencies:
+      '@types/react': ^18.2.6
       react: 18.2.0
-      react-native: ^0.73.0
+      react-native: ^0.74.0
     dependencies:
       '@babel/runtime': 7.24.8
       '@jest/create-cache-key-function': 29.7.0
-      '@react-native-community/cli': 12.3.6
-      '@react-native-community/cli-platform-android': 12.3.6
-      '@react-native-community/cli-platform-ios': 12.3.6
-      '@react-native-windows/cli': 0.73.5(react-native@0.74.3)
-      '@react-native/assets-registry': 0.73.1
-      '@react-native/codegen': 0.73.3(@babel/preset-env@7.24.8)
-      '@react-native/community-cli-plugin': 0.73.17(@babel/core@7.24.9)(@babel/preset-env@7.24.8)
-      '@react-native/gradle-plugin': 0.73.4
-      '@react-native/js-polyfills': 0.73.1
-      '@react-native/normalize-colors': 0.73.2
-      '@react-native/virtualized-lists': 0.73.4(react-native@0.74.3)
+      '@react-native-community/cli': 13.6.9
+      '@react-native-community/cli-platform-android': 13.6.9
+      '@react-native-community/cli-platform-ios': 13.6.9
+      '@react-native-windows/cli': 0.74.1(react-native@0.74.3)
+      '@react-native/assets': 1.0.0
+      '@react-native/assets-registry': 0.74.85
+      '@react-native/codegen': 0.74.85(@babel/preset-env@7.24.8)
+      '@react-native/community-cli-plugin': 0.74.85(@babel/core@7.24.9)(@babel/preset-env@7.24.8)
+      '@react-native/gradle-plugin': 0.74.85
+      '@react-native/js-polyfills': 0.74.85
+      '@react-native/normalize-colors': 0.74.85
+      '@react-native/virtualized-lists': 0.74.85(@types/react@18.3.3)(react-native@0.74.3)(react@18.2.0)
+      '@types/react': 18.3.3
       abort-controller: 3.0.0
       anser: 1.4.10
       ansi-regex: 5.0.1
       base64-js: 1.5.1
       chalk: 4.1.2
-      deprecated-react-native-prop-types: 5.0.0
       event-target-shim: 5.0.1
       flow-enums-runtime: 0.0.6
       invariant: 2.2.4
@@ -8051,7 +8075,7 @@ packages:
       pretty-format: 26.6.2
       promise: 8.3.0
       react: 18.2.0
-      react-devtools-core: 4.28.5
+      react-devtools-core: 5.3.1
       react-native: 0.74.3(@babel/core@7.24.9)(@babel/preset-env@7.24.8)(@types/react@18.3.3)(react@18.2.0)
       react-refresh: 0.14.2
       react-shallow-renderer: 16.15.0(react@18.2.0)

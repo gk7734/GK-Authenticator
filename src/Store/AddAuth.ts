@@ -14,13 +14,12 @@ interface AuthStore {
   otpCodes: {[key: string]: string};
   timeRemaining: number;
   selectedAccount: Auth | null;
-  bottomSheetPosition: number;
+  isLoading: boolean;
   addAuth: (auth: Auth) => void;
   removeAuth: (secret: string) => void;
   generateOTP: () => void;
   setTimeRemaining: (time: number) => void;
   setSelectedAccount: (auth: Auth | null) => void;
-  setBottomSheetPosition: (position: number) => void;
 }
 
 type MyPersist = (
@@ -30,12 +29,12 @@ type MyPersist = (
 
 const useAuthStore = create<AuthStore>(
   (persist as MyPersist)(
-    set => ({
+    (set, get) => ({
       auths: [],
       otpCodes: {},
       timeRemaining: 30,
       selectedAccount: null,
-      bottomSheetPosition: -1,
+      isLoading: true,
       addAuth: auth =>
         set(state => ({
           auths: [...state.auths, auth],
@@ -44,18 +43,18 @@ const useAuthStore = create<AuthStore>(
         set(state => ({
           auths: state.auths.filter(auth => auth.secret !== secret),
         })),
-      generateOTP: () =>
-        set(state => {
-          const newOtpCodes: {[key: string]: string} = {};
-          state.auths.forEach(auth => {
-            const token = authenticator.generate(auth.secret);
-            newOtpCodes[auth.issuer] = token;
-          });
-          return {otpCodes: newOtpCodes};
-        }),
+      generateOTP: async () => {
+        set({isLoading: true});
+        const newOtpCodes: {[key: string]: string} = {};
+        const auths = get().auths;
+        for (const auth of auths) {
+          const token = authenticator.generate(auth.secret);
+          newOtpCodes[auth.issuer] = token;
+        }
+        set({otpCodes: newOtpCodes, isLoading: false});
+      },
       setTimeRemaining: time => set({timeRemaining: time}),
       setSelectedAccount: auth => set({selectedAccount: auth}),
-      setBottomSheetPosition: position => set({bottomSheetPosition: position}),
     }),
     {
       name: 'auth-storage',

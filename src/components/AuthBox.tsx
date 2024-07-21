@@ -9,23 +9,26 @@ import {
 } from 'react-native';
 import AdIcon from 'react-native-vector-icons/AntDesign';
 import useAuthStore from '../Store/AddAuth.ts';
+import {useAuthDetailStore} from '../Store/AuthDetail.ts';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
 
 type RootStackParamList = {
   Home: undefined;
   AddAuth: undefined;
-  OtpAuth: {user: string; issuer: string; secret: string};
+  OtpAuth: undefined;
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const AuthBox: FC = () => {
   const auths = useAuthStore(state => state.auths);
+  const setAuthDetail = useAuthDetailStore(state => state.setAuthDetail);
   const navigation = useNavigation<NavigationProp>();
 
-  const goOtpAuthPage = (user: string, issuer: string, secret: string) => {
-    navigation.navigate('OtpAuth', {user, issuer, secret});
+  const goOtpAuth = (user: string, issuer: string, icon: string) => {
+    navigation.navigate('OtpAuth');
+    setAuthDetail(user, issuer, icon);
   };
 
   return (
@@ -36,7 +39,11 @@ const AuthBox: FC = () => {
             <TouchableOpacity
               style={style.authContainer}
               onPress={() =>
-                goOtpAuthPage(item.user, item.issuer, item.secret)
+                goOtpAuth(
+                  item.user,
+                  item.issuer,
+                  'https://cdn.brandfetch.io/revolut.com/w/400/h/400',
+                )
               }>
               <Image
                 source={{
