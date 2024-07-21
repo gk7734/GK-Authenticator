@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Svg, {Path, Polygon} from 'react-native-svg';
 
-const Logo = () => (
-  <Svg width="40" height="40" viewBox="0 0 40 40">
+interface LogoProps {
+  size: number;
+}
+
+const Logo: FC<LogoProps> = ({size}) => (
+  <Svg width={size} height={size} viewBox="0 0 40 40">
     <Path
       fill="#fe9526"
       d="M20,14l-1.7,3h-3.5l-4.4-7.5c-0.8-1.4-0.3-3.3,1.1-4.1s3.3-0.4,4.1,1.1L20,14z"

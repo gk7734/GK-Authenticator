@@ -43,12 +43,13 @@ const styles = StyleSheet.create({
   authMainText: {
     color: 'black',
     fontSize: 14,
-    fontWeight: '500',
+    fontFamily: 'Pretendard-Bold',
   },
 
   authSubText: {
-    color: 'black',
+    color: '#656565',
     fontSize: 12,
+    fontFamily: 'Pretendard-Medium',
   },
 
   brandIcon: {

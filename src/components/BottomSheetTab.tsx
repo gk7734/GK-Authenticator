@@ -9,6 +9,11 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import Toast from 'react-native-toast-message';
 import {useModalStore} from '../Store/Modal.ts';
 import {useAuthDetailStore} from '../Store/AuthDetail.ts';
+import {
+  checkBiometrics,
+  loginWithBiometrics,
+} from '../Typescript/utils/BiometricsUtils.tsx';
+import {BiometryTypes} from 'react-native-biometrics';
 
 interface BottomSheetProps {
   onPositionChange: (position: number) => void;
@@ -17,13 +22,14 @@ interface BottomSheetProps {
 const BottomSheetTab: FC<BottomSheetProps> = ({onPositionChange}) => {
   const snapPoints: string[] = useMemo(() => ['15%', '92%'], []);
   const {otpCodes} = useAuthStore();
-  const [isShow, setIsShow] = useState(true);
+  const [isShow, setIsShow] = useState(false);
   const setIsOpen = useModalStore(state => state.setIsOpen);
-  const {user, issuer} = useAuthDetailStore();
+  const {user, issuer, secret} = useAuthDetailStore();
+  const [biometricAuthenticated, setBiometricAuthenticated] = useState(false);
 
   const copyToClipboard = async () => {
     try {
-      Clipboard.setString(otpCodes[issuer]);
+      Clipboard.setString(otpCodes[secret]);
     } catch (err) {
       Toast.show({
         type: 'error',
@@ -40,8 +46,31 @@ const BottomSheetTab: FC<BottomSheetProps> = ({onPositionChange}) => {
     [onPositionChange],
   );
 
+  const authenticateBiometrics = async (): Promise<void> => {
+    const biometryType = await checkBiometrics();
+    if (biometryType === BiometryTypes.Biometrics) {
+      const userId = 'OtpAuthUser';
+      const result = await loginWithBiometrics(userId);
+
+      if (result) {
+        setBiometricAuthenticated(true);
+        setIsShow(true);
+      } else {
+        console.log('Biometric authentication failed');
+        setBiometricAuthenticated(false);
+      }
+    } else {
+      setBiometricAuthenticated(false);
+    }
+  };
+
   const onOtpShow = () => {
-    setIsShow(!isShow);
+    if (!isShow && !biometricAuthenticated) {
+      authenticateBiometrics();
+    } else {
+      setIsShow(false);
+      setBiometricAuthenticated(false);
+    }
   };
 
   return (
@@ -75,10 +104,10 @@ const BottomSheetTab: FC<BottomSheetProps> = ({onPositionChange}) => {
             }}>
             <View style={styles.card}>
               <View>
-                <Text style={styles.boldText}>
+                <Text style={isShow ? styles.boldText : styles.boldTextShow}>
                   {isShow
-                    ? otpCodes[issuer] !== undefined && otpCodes[issuer] !== '0'
-                      ? otpCodes[issuer]
+                    ? otpCodes[secret] !== undefined && otpCodes[secret] !== '0'
+                      ? otpCodes[secret]
                       : 'Loading...'
                     : '*****'}
                 </Text>
@@ -142,6 +171,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'black',
     fontSize: 20,
+    fontFamily: 'Pretendard-SemiBold',
     fontWeight: '500',
   },
   flex: {
@@ -159,20 +189,31 @@ const styles = StyleSheet.create({
   },
 
   boldText: {
-    marginTop: 10,
+    marginTop: 5,
     fontSize: 48,
-    fontWeight: '800',
+    fontFamily: 'Pretendard-ExtraBold',
+    color: 'black',
+    textAlign: 'center',
+    letterSpacing: 8,
+    marginBottom: 10,
+  },
+
+  boldTextShow: {
+    marginTop: 5,
+    paddingTop: 10,
+    top: 5,
+    fontSize: 48,
+    fontFamily: 'Pretendard-ExtraBold',
     color: 'black',
     textAlign: 'center',
     letterSpacing: 8,
   },
 
   normalText: {
-    marginTop: 15,
     textAlign: 'center',
     color: '#292929',
-    fontWeight: '500',
     fontSize: 14,
+    fontFamily: 'Pretendard-Medium',
   },
 
   card: {

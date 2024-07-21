@@ -8,7 +8,7 @@ const AppHeader: FC = () => {
     <View style={style.header}>
       <View style={style.view}>
         <TouchableOpacity>
-          <Logo />
+          <Logo size={40} />
         </TouchableOpacity>
       </View>
       <View style={style.view_flex}>

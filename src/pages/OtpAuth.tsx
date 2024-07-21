@@ -74,12 +74,13 @@ const styles = StyleSheet.create({
   boldText: {
     marginTop: 10,
     fontSize: 28,
+    fontFamily: 'Pretendard-Bold',
     letterSpacing: 1,
-    fontWeight: '800',
     color: '#292929',
   },
   normalText: {
     fontSize: 15,
+    fontFamily: 'Pretendard-Regular',
     color: '#292929',
   },
   center: {

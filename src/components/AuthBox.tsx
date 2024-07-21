@@ -26,9 +26,14 @@ const AuthBox: FC = () => {
   const setAuthDetail = useAuthDetailStore(state => state.setAuthDetail);
   const navigation = useNavigation<NavigationProp>();
 
-  const goOtpAuth = (user: string, issuer: string, icon: string) => {
+  const goOtpAuth = (
+    user: string,
+    issuer: string,
+    icon: string,
+    secret: string,
+  ) => {
     navigation.navigate('OtpAuth');
-    setAuthDetail(user, issuer, icon);
+    setAuthDetail(user, issuer, icon, secret);
   };
 
   return (
@@ -43,6 +48,7 @@ const AuthBox: FC = () => {
                   item.user,
                   item.issuer,
                   'https://cdn.brandfetch.io/revolut.com/w/400/h/400',
+                  item.secret,
                 )
               }>
               <Image
@@ -103,12 +109,13 @@ const style = StyleSheet.create({
   authMainText: {
     color: 'black',
     fontSize: 14,
-    fontWeight: '500',
+    fontFamily: 'Pretendard-Bold',
   },
 
   authSubText: {
     color: '#989898',
     fontSize: 12,
+    fontFamily: 'Pretendard-Light',
   },
 
   authArrowIcon: {

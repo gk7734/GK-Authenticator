@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 
   mainText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Pretendard-SemiBold',
   },
 });
 

@@ -33,7 +33,7 @@ const style = StyleSheet.create({
 
   textColor: {
     fontSize: 16,
-    fontWeight: '500',
+    fontFamily: 'Pretendard-SemiBold',
     color: '#BDBDBD',
     marginLeft: 5,
   },

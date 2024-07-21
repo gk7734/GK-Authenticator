@@ -11,7 +11,7 @@ interface Auth {
 
 interface AuthStore {
   auths: Auth[];
-  otpCodes: {[key: string]: string};
+  otpCodes: {[secret: string]: string};
   timeRemaining: number;
   selectedAccount: Auth | null;
   isLoading: boolean;
@@ -42,14 +42,17 @@ const useAuthStore = create<AuthStore>(
       removeAuth: secret =>
         set(state => ({
           auths: state.auths.filter(auth => auth.secret !== secret),
+          otpCodes: Object.fromEntries(
+            Object.entries(state.otpCodes).filter(([key]) => key !== secret),
+          ),
         })),
       generateOTP: async () => {
         set({isLoading: true});
-        const newOtpCodes: {[key: string]: string} = {};
+        const newOtpCodes: {[secret: string]: string} = {};
         const auths = get().auths;
         for (const auth of auths) {
           const token = authenticator.generate(auth.secret);
-          newOtpCodes[auth.issuer] = token;
+          newOtpCodes[auth.secret] = token;
         }
         set({otpCodes: newOtpCodes, isLoading: false});
       },

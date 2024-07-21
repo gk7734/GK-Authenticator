@@ -19,7 +19,7 @@ import AddAuth from '../components/AddAuth.tsx';
 type RootStackParamList = {
   Home: undefined;
   AddAuth: undefined;
-  // 다른 스크린들도 여기에 추가
+  OtpAuth: undefined;
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
@@ -87,7 +87,7 @@ const style = StyleSheet.create({
     marginTop: 20,
     fontSize: 32,
     color: 'black',
-    fontWeight: 'bold',
+    fontFamily: 'Pretendard-Bold',
     textAlign: 'center',
   },
 
@@ -103,6 +103,7 @@ const style = StyleSheet.create({
   mainTextText: {
     color: 'black',
     fontSize: 16,
+    fontFamily: 'Pretendard-Light',
     letterSpacing: 2,
   },
 
@@ -128,7 +129,7 @@ const style = StyleSheet.create({
   subTextText: {
     flex: 1,
     color: 'black',
-    fontWeight: '500',
+    fontFamily: 'Pretendard-Bold',
     fontSize: 12,
   },
 
@@ -153,6 +154,7 @@ const style = StyleSheet.create({
   textInputText: {
     color: 'black',
     fontSize: 12,
+    fontFamily: 'Pretendard-Regular',
     marginLeft: 4,
   },
 
@@ -193,13 +195,6 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-
-  textColor: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#BDBDBD',
-    marginLeft: 5,
   },
 });
 
