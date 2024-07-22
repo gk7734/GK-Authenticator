@@ -33,8 +33,8 @@ const style = StyleSheet.create({
 
   text: {
     fontSize: 22,
+    fontFamily: 'Pretendard-SemiBold',
     color: 'black',
-    fontWeight: '600',
   },
 });
 

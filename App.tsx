@@ -2,12 +2,12 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from './src/pages/Home.tsx';
-import AppHeader from './src/components/AppHeader.tsx';
+import AppHeader from './src/components/Header/AppHeader.tsx';
 import Add from './src/pages/Add.tsx';
 import Toast from 'react-native-toast-message';
-import QRHeader from './src/components/QRHeader.tsx';
+import QRHeader from './src/components/Header/QRHeader.tsx';
 import OtpAuth from './src/pages/OtpAuth.tsx';
-import OtpAuthHeader from './src/components/OtpAuthHeader.tsx';
+import OtpAuthHeader from './src/components/Header/OtpAuthHeader.tsx';
 import useAuthStore from './src/Store/AddAuth.ts';
 import {
   checkBiometrics,
@@ -23,6 +23,8 @@ import {
   View,
 } from 'react-native';
 import Logo from './src/components/Logo.tsx';
+import Settings from './src/pages/Settings.tsx';
+import SettingsHeader from './src/components/Header/SettingsHeader.tsx';
 
 const Stack = createStackNavigator();
 
@@ -93,17 +95,22 @@ export const App = () => {
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName="Home"
-            screenOptions={{headerShown: true, header: () => <AppHeader />}}>
+            screenOptions={{header: () => <AppHeader />}}>
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen
               name="AddAuth"
               component={Add}
-              options={{headerShown: true, header: () => <QRHeader />}}
+              options={{header: () => <QRHeader />}}
             />
             <Stack.Screen
               name="OtpAuth"
               component={OtpAuth}
               options={{header: () => <OtpAuthHeader />}}
+            />
+            <Stack.Screen
+              name={'Setting'}
+              component={Settings}
+              options={{header: () => <SettingsHeader />}}
             />
           </Stack.Navigator>
           <Toast />

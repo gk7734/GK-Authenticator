@@ -1,21 +1,34 @@
 import React, {FC} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import Logo from './Logo.tsx';
+import Logo from '../Logo';
+import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
+import {useNavigation} from '@react-navigation/native';
+
+type RootStackParamList = {
+  Home: undefined;
+  AddAuth: undefined;
+  OtpAuth: undefined;
+  Setting: undefined;
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const AppHeader: FC = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   return (
-    <View style={style.header}>
-      <View style={style.view}>
+    <View style={styles.header}>
+      <View style={styles.view}>
         <TouchableOpacity>
           <Logo size={40} />
         </TouchableOpacity>
       </View>
-      <View style={style.view_flex}>
+      <View style={styles.view_flex}>
         <TouchableOpacity>
           <Icon name={'moon'} size={26} color={'black'} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
           <Icon name={'settings'} size={26} color={'black'} />
         </TouchableOpacity>
       </View>
@@ -25,7 +38,7 @@ const AppHeader: FC = () => {
 
 export default AppHeader;
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
     marginTop: 8,
     height: 50,

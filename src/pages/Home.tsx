@@ -20,6 +20,7 @@ type RootStackParamList = {
   Home: undefined;
   AddAuth: undefined;
   OtpAuth: undefined;
+  Setting: undefined;
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
@@ -70,7 +71,7 @@ const Home: FC = () => {
         <View>
           <TouchableOpacity style={style.settingBox}>
             <Image
-              source={require('../assets/edit_.png')}
+              source={require('../assets/Image/edit_.png')}
               style={style.image}
             />
           </TouchableOpacity>
