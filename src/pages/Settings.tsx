@@ -1,13 +1,14 @@
-import {Text, View} from 'react-native';
+import {ScrollView} from 'react-native';
 import React from 'react';
 import Profile from '../components/Profile.tsx';
 
 const Settings = () => {
   return (
-    <View>
+    <ScrollView>
       <Profile />
-    </View>
+    </ScrollView>
   );
 };
 
 export default Settings;
+ 
