@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import Logo from '../Logo';
 import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
 import {useNavigation} from '@react-navigation/native';
+import {useThemeStore} from '../../Store/Theme.ts';
 
 type RootStackParamList = {
   Home: undefined;
@@ -16,6 +17,7 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const AppHeader: FC = () => {
   const navigation = useNavigation<NavigationProp>();
+  const {darkMode, setDarkMode} = useThemeStore();
 
   return (
     <View style={styles.header}>
@@ -25,8 +27,8 @@ const AppHeader: FC = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.view_flex}>
-        <TouchableOpacity>
-          <Icon name={'moon'} size={26} color={'black'} />
+        <TouchableOpacity onPress={() => setDarkMode(!darkMode)}>
+          <Icon name={darkMode ? 'moon' : 'sun'} size={26} color={'black'} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
           <Icon name={'settings'} size={26} color={'black'} />
