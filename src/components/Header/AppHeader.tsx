@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Logo from '../Logo';
-import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {useThemeStore} from '../../Store/Theme.ts';
 
@@ -13,7 +13,7 @@ type RootStackParamList = {
   Setting: undefined;
 };
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type NavigationProp = StackNavigationProp<RootStackParamList>;
 
 const AppHeader: FC = () => {
   const navigation = useNavigation<NavigationProp>();

@@ -11,7 +11,7 @@ import AdIcon from 'react-native-vector-icons/AntDesign';
 import useAuthStore from '../Store/AddAuth.ts';
 import {useAuthDetailStore} from '../Store/AuthDetail.ts';
 import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 type RootStackParamList = {
   Home: undefined;
@@ -19,7 +19,7 @@ type RootStackParamList = {
   OtpAuth: undefined;
 };
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type NavigationProp = StackNavigationProp<RootStackParamList>;
 
 interface AuthBoxProps {
   search: string;

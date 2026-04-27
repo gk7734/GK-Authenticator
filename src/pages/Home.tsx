@@ -12,7 +12,7 @@ import FIcon from 'react-native-vector-icons/Feather';
 import MtIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AuthBox from '../components/AuthBox.tsx';
 import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from 'react-native-screens/native-stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 import useAuthStore from '../Store/AddAuth.ts';
 import AddAuth from '../components/AddAuth.tsx';
 
@@ -23,7 +23,7 @@ type RootStackParamList = {
   Setting: undefined;
 };
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
+type NavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const Home: FC = () => {
   const inputRef = useRef<TextInput>(null);

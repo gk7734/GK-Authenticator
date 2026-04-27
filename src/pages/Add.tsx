@@ -54,10 +54,9 @@ const Add: FC = () => {
         ref={ref}
         cameraType={CameraType.Back}
         scanBarcode
-        showFrame={true} // true로 변경
-        laserColor="red" // 레이저 색상 설정 (선택사항)
-        frameColor="white" // 프레임 색상을 흰색으로 설정
-        surfaceColor="rgba(0, 0, 0, 0.5)" // 표면 색상 설정 (선택사항)
+        showFrame={true}
+        laserColor="red"
+        frameColor="white"
         onReadCode={onBarCodeRead}
       />
     </View>
